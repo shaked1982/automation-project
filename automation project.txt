@@ -1,0 +1,114 @@
+package automaticselenium;
+
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+public class automation_test {
+
+	public static void main(String[] args)  throws Exception{
+	System.setProperty("webdriver.chrome.driver", "C:\\Users\\97252\\Downloads\\selenium\\chromedriver.exe");
+	 WebDriver driver=new ChromeDriver();
+	 driver.navigate().to("https://petstore.octoperf.com/actions/Catalog.action");
+	 driver.manage().window().maximize();
+	 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	 //this automatic test will be in slow mothion (thread 2000)
+	 //sign in (username and password)
+	 WebElement signIn= driver.findElement(By.linkText("Sign In"));
+	signIn.click();
+	Thread.sleep(2000);
+	WebElement name= driver.findElement(By.name("username"));
+	name.sendKeys("oksana");
+	Thread.sleep(2000);
+	WebElement Password= driver.findElement(By.cssSelector("input[name='password']"));
+	Password.clear();
+	Password.sendKeys("1982");
+	Thread.sleep(2000);
+	//Login 
+	WebElement LogIn =driver.findElement(By.cssSelector("[value='Login']")); LogIn.click();
+	Thread.sleep(2000);
+	// check if the text "sign out" appears at the top
+	WebElement  signout =driver.findElement(By.cssSelector("a[href=\"/actions/Account.action?signoff=\"]"));
+	String signouttext=signout.getText();
+	if(signouttext.equals("Sign Out"))
+		System.out.println("Test passed: Sign Out appears at the top");
+	else
+		System.out.println("Test faild: Sign Out doesn't appears");
+	//order of two dogs: 2 Poodles 
+	 WebElement DogsButton = driver.findElement(By.cssSelector("[src=\"../images/dogs_icon.gif\"]"));DogsButton.click();
+	 Thread.sleep(2000);
+	 WebElement ProductIdLink =driver.findElement(By.partialLinkText("K9-PO-02")); ProductIdLink.click();
+	 Thread.sleep(2000);
+	 WebElement ItemIdLink =driver.findElement(By.partialLinkText("EST-8"));  ItemIdLink.click();
+	 Thread.sleep(2000);
+	 WebElement AddToCard= driver.findElement(By.className("Button"));AddToCard.click();
+	 Thread.sleep(2000);
+	 WebElement QuantityButton=driver.findElement(By.name("EST-8"));QuantityButton.clear();
+	 Thread.sleep(2000);
+	 QuantityButton.sendKeys("2");
+	 Thread.sleep(2000);
+	 WebElement UpdateCartbutton= driver.findElement(By.name("updateCartQuantities"));UpdateCartbutton.click(); 
+	 Thread.sleep(2000);
+	 //return to main menu
+	 WebElement ReturnToMainMenu =driver.findElement(By.id("BackLink"));ReturnToMainMenu.click();
+	 Thread.sleep(2000);
+	 //order of three  	Angelfish fish
+	 WebElement FishButton = driver.findElement(By.cssSelector("[src=\"../images/fish_icon.gif\"]"));FishButton.click();
+	 Thread.sleep(2000);
+	 WebElement ProductIdLink2 =driver.findElement(By.partialLinkText("FI-SW-01")); ProductIdLink2.click();
+	 Thread.sleep(2000);
+	 WebElement LargeAngelfish =driver.findElement(By.partialLinkText("EST-1")); LargeAngelfish.click();
+	 Thread.sleep(2000);
+	 WebElement AddToCard2= driver.findElement(By.cssSelector("[class=\"Button\"]"));AddToCard2.click();
+	 WebElement QuantityButton2=driver.findElement(By.cssSelector("[name=\"EST-1\"]"));QuantityButton2.clear();
+	 Thread.sleep(2000);
+	 QuantityButton2.sendKeys("3");
+	 Thread.sleep(2000);
+	//payment details
+	 WebElement UpdateCartbutton2= driver.findElement(By.cssSelector("[name=\"updateCartQuantities\"]"));UpdateCartbutton2.click(); 
+	 Thread.sleep(2000);
+	 WebElement ProceedToCheckout=driver.findElement(By.linkText("Proceed to Checkout")); ProceedToCheckout.click();
+	 Thread.sleep(2000);
+	 WebElement CardType =driver.findElement(By.name("order.cardType"));
+	 Select SelectCard =new Select(CardType);
+	 SelectCard.selectByVisibleText("MasterCard");
+	 Thread.sleep(2000);
+	 WebElement CardNumber =driver.findElement(By.name("order.creditCard")); CardNumber.clear();
+	 Thread.sleep(2000);
+	 CardNumber.sendKeys("1234 2345 5678 6789");
+	 Thread.sleep(2000);
+	 WebElement ExpiryDate =driver.findElement(By.cssSelector("input[name='order.expiryDate']"));  ExpiryDate.clear();
+	 Thread.sleep(2000);
+	 ExpiryDate.sendKeys("29/05");
+	 Thread.sleep(2000);
+	 WebElement Continue =driver.findElement(By.name("newOrder")); Continue.click();
+	 Thread.sleep(2000);
+	 WebElement Confirm=driver.findElement(By.cssSelector(".Button")); Confirm.click();
+	 Thread.sleep(2000);
+	 
+	String text1= " Sub Total";
+	String text2="Total";
+	if (text1.contains(text2))
+		System.out.println("text2 exist in text1");
+	else
+		System.out.println("text2 doesn't exist in text1");
+ 	//sign out
+ 		 WebElement signOut= driver.findElement(By.cssSelector("a[href=\"/actions/Account.action?signoff=\"]"));
+ 		 signOut.click();
+ 		 //check if the text "sign In" appears at the top
+ 		WebElement signin=driver.findElement(By.linkText("Sign In"));
+ 		String signinttext= signin.getText();
+ 		if(signinttext.equals("Sign In"))
+ 			System.out.println("Test passed: Sign In appears at the top");
+ 		else
+ 			System.out.println("Test faild: Sign In doesn't appears");
+ 		
+ 		 
+	}
+	 
+     } 
+	
